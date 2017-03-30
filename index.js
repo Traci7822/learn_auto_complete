@@ -17,3 +17,10 @@ function hello(){
 // Make sure your event page closes as soon as the event that opened it is processed. You can observe the lifetime of your event page by opening Chrome's task manager. You can see when your event page loads and unloads by observing when an entry for your extension appears in the list of processes.
 //
 // Once the event page has been idle a short time (a few seconds), the runtime.onSuspend event is dispatched. The event page has a few more seconds to handle this event before it is forcibly unloaded. If during this time an event occurs which would normally cause the event page to be loaded, the suspend is canceled and the runtime.onSuspendCanceled event is dispatched.
+
+function getPageDetails(callback) {
+  chrome.tabs.executeScript(null, {file: 'content.js'});
+  chrome.runtime.onMessage.addListener(function(message) {
+    callback(message);
+  });
+}
