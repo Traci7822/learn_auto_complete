@@ -51,5 +51,12 @@ function createField(button){
 
 function saveContent(){
   var content = document.getElementsByClassName('media-block__content--fill')[0].textContent;
-  
+  if (content.length <= 1) {
+    console.log('Error: No content selected');
+    return;
+  }
+  chrome.storage.sync.set({'value': content}, function() {
+    console.log('content saved')
+  })
+  debugger;
 }
