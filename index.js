@@ -58,5 +58,6 @@ function saveContent(){
   chrome.storage.sync.set({'value': content}, function() {
     console.log('content saved')
   })
+  // check save settings (cannot read property sync of undefined)
   debugger;
 }
