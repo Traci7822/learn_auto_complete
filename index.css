@@ -1,10 +1,10 @@
-.copy_button {
+.save_button_field {
     width: 5%;
     float: right;
     z-index: 2;
 }
 
-.copy_button img {
+.save_button img {
   position: relative;
   height: 75%;
   width: 75%;

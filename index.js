@@ -19,12 +19,37 @@ function hello(){
 // Once the event page has been idle a short time (a few seconds), the runtime.onSuspend event is dispatched. The event page has a few more seconds to handle this event before it is forcibly unloaded. If during this time an event occurs which would normally cause the event page to be loaded, the suspend is canceled and the runtime.onSuspendCanceled event is dispatched.
 
 window.onload = function addSaveContentIcon(){
-  var newMediaSpot = document.createElement('div');
-  newMediaSpot.setAttribute('class', 'copy_button');
-  var newMediaImage = document.createElement('img');
-  newMediaImage.src = "https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg";
-  newMediaImage.setAttribute = ('id', "image_icon");
-  newMediaSpot.appendChild(newMediaImage);
+  event.preventDefault;
   var mediaSection = document.getElementsByClassName('media-block__content');
-  mediaSection[4].appendChild(newMediaSpot);
+  var button = createButtonField();
+  mediaSection[4].appendChild(button);
+}
+
+function createButtonField() {
+  var saveButton = createButton();
+  var saveButtonField = createField(saveButton);
+  return saveButtonField;
+}
+
+function createButton(){
+  var saveButton = document.createElement('button');
+  saveButton.innerHTML = "<img src='https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg'/>";
+  saveButton.className = "save_button";
+  saveButton.style = "cursor: pointer";
+  saveButton.onclick = function(){
+    saveContent();
+  }
+  return saveButton;
+}
+
+function createField(button){
+  var saveButtonField = document.createElement('div');
+  saveButtonField.setAttribute('class', 'save_button_field');
+  saveButtonField.appendChild(button);
+  return saveButtonField;
+}
+
+function saveContent(){
+  var content = document.getElementsByClassName('media-block__content--fill')[0].textContent;
+  
 }
