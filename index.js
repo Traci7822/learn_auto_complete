@@ -42,6 +42,7 @@ function createButton(type){
   button.id = `${type}_button`;
   button.style = "cursor: pointer";
   button.onclick = function(){
+    // change for event target
     saveContent();
   }
   return button;

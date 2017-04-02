@@ -8,6 +8,11 @@
 #save_button {
 
   position: relative;
+  /*height: 75%;
+  width: 75%;*/
+}
+
+#save_image {
   height: 75%;
   width: 75%;
 }
@@ -21,7 +26,15 @@
   width: 50%;
 }
 
-#save_image {
-  /*background: url(https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg) no-repeat;*/
+.content_button_field {
+  width: 5%;
+  /*height: auto;*/
+  float: left;
+  /*z-index: 2;*/
+}
 
+#content_image {
+  position: relative;
+  height: 50%;
+  width: 50%;
 }
