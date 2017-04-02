@@ -41,9 +41,9 @@ function createButton(type){
   button.appendChild(image);
   button.id = `${type}_button`;
   button.style = "cursor: pointer";
-  button.onclick = function(){
-    // change for event target
-    saveContent();
+  button.onclick = function(event){
+    var type = event.target.id.split("_")[0];
+    eval(type + 'Action()');
   }
   return button;
 }
@@ -63,7 +63,7 @@ function createImage(type) {
   return image;
 }
 
-function saveContent(){
+function saveAction(){
   var content = document.getElementsByTagName('textarea')[1].value;
   if (content.length <= 1) {
     console.log('Error: No content selected');
@@ -73,4 +73,8 @@ function saveContent(){
     console.log('content saved')
     // need to save to storage
   })
+}
+
+function contentAction() {
+  // populate dropdown of saved content
 }
