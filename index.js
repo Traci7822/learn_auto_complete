@@ -17,7 +17,6 @@ function hello(){
 // Make sure your event page closes as soon as the event that opened it is processed. You can observe the lifetime of your event page by opening Chrome's task manager. You can see when your event page loads and unloads by observing when an entry for your extension appears in the list of processes.
 //
 // Once the event page has been idle a short time (a few seconds), the runtime.onSuspend event is dispatched. The event page has a few more seconds to handle this event before it is forcibly unloaded. If during this time an event occurs which would normally cause the event page to be loaded, the suspend is canceled and the runtime.onSuspendCanceled event is dispatched.
-
 window.onload = function addSaveContentIcon(){
   event.preventDefault;
   var mediaSection = document.getElementsByClassName('media-block__content');
@@ -33,7 +32,9 @@ function createButtonField(type) {
 
 function createButton(type){
   var button = document.createElement('button');
-  // button.innerHTML = "<img src='https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg'/>";
+  var image = createImage(type);
+  debugger;
+  button.appendChild(image);
   button.id = `${type}_button`;
   button.style = "cursor: pointer";
   button.onclick = function(){
@@ -47,6 +48,15 @@ function createField(button, type){
   buttonField.setAttribute('class', `${type}_button_field`);
   buttonField.appendChild(button);
   return buttonField;
+}
+
+function createImage(type) {
+  var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
+  var image = document.createElement('IMG');
+  image.id = `${type}_image`;
+  var image_url = `${type}_image_url`;
+  image.src = eval(image_url);
+  return image;
 }
 
 function saveContent(){

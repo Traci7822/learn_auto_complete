@@ -5,7 +5,8 @@
     z-index: 2;
 }
 
-.save_button img {
+#save_button {
+
   position: relative;
   height: 75%;
   width: 75%;
@@ -18,4 +19,9 @@
 
 #js--file-upload-btn {
   width: 50%;
+}
+
+#save_image {
+  /*background: url(https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg) no-repeat;*/
+
 }
