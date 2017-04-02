@@ -21,43 +21,42 @@ function hello(){
 window.onload = function addSaveContentIcon(){
   event.preventDefault;
   var mediaSection = document.getElementsByClassName('media-block__content');
-  var button = createButtonField();
-  mediaSection[4].appendChild(button);
+  var saveButton = createButtonField('save');
+  mediaSection[4].appendChild(saveButton);
 }
 
-function createButtonField() {
-  var saveButton = createButton();
-  var saveButtonField = createField(saveButton);
-  return saveButtonField;
+function createButtonField(type) {
+  var button = createButton(type);
+  var buttonField = createField(button, type);
+  return buttonField;
 }
 
-function createButton(){
-  var saveButton = document.createElement('button');
-  saveButton.innerHTML = "<img src='https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg'/>";
-  saveButton.className = "save_button";
-  saveButton.style = "cursor: pointer";
-  saveButton.onclick = function(){
+function createButton(type){
+  var button = document.createElement('button');
+  // button.innerHTML = "<img src='https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg'/>";
+  button.id = `${type}_button`;
+  button.style = "cursor: pointer";
+  button.onclick = function(){
     saveContent();
   }
-  return saveButton;
+  return button;
 }
 
-function createField(button){
-  var saveButtonField = document.createElement('div');
-  saveButtonField.setAttribute('class', 'save_button_field');
-  saveButtonField.appendChild(button);
-  return saveButtonField;
+function createField(button, type){
+  var buttonField = document.createElement('div');
+  buttonField.setAttribute('class', `${type}_button_field`);
+  buttonField.appendChild(button);
+  return buttonField;
 }
 
 function saveContent(){
-  var content = document.getElementsByClassName('media-block__content--fill')[0].textContent;
+  var content = document.getElementsByTagName('textarea')[1].value;
   if (content.length <= 1) {
     console.log('Error: No content selected');
     return;
   }
   chrome.storage.sync.set({'value': content}, function() {
     console.log('content saved')
+    // need to save to storage
   })
-  // check save settings (cannot read property sync of undefined)
-  debugger;
 }
