@@ -1,5 +1,6 @@
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 var content_image_url = 'https://c1.staticflickr.com/4/3943/33793771665_e25336d636_t.jpg';
+var contentCollection = []
 
 window.onload = function addSaveContentIcon(){
   event.preventDefault;
@@ -46,15 +47,33 @@ function createImage(type) {
 
 function saveAction(){
   var content = document.getElementsByTagName('textarea')[1].value;
+  var obj = {};
+  obj['value'] = content;
   if (content.length <= 1) {
     console.log('Error: No content selected');
     return;
   }
-  chrome.storage.sync.set({'value': content}, function() {
+  chrome.storage.sync.set(obj, function() {
     console.log('content saved')
+    contentCollection.push(obj)
   })
 }
 
 function contentAction() {
-  // populate dropdown of saved content
+  var content = [];
+  var dropDownField = document.createElement('div');
+  debugger;
+  var dropDownContent = chrome.storage.sync.get('value', function(items) {
+    if (!chrome.runtime.error) {
+      for (var i = 0; i < items.length; i++) {
+        content.push(item);
+        console.log(item);
+      }
+    }
+  })
+  // chrome.storage.sync.get('value', function(items) {
+  //   if (!chrome.runtime.error) {
+  //     console.log(items);
+  //   }
+  // });
 }
