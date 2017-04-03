@@ -60,20 +60,21 @@ function saveAction(){
 }
 
 function contentAction() {
-  var content = [];
+  var field = populateDropDown();
+  var input = document.getElementsByTagName('textarea')[1];
+  input.appendChild(field);
+  // field not showing up yet
+}
+
+function populateDropDown() {
   var dropDownField = document.createElement('div');
-  debugger;
-  var dropDownContent = chrome.storage.sync.get('value', function(items) {
-    if (!chrome.runtime.error) {
-      for (var i = 0; i < items.length; i++) {
-        content.push(item);
-        console.log(item);
-      }
-    }
-  })
-  // chrome.storage.sync.get('value', function(items) {
-  //   if (!chrome.runtime.error) {
-  //     console.log(items);
-  //   }
-  // });
+  var dropDownList = document.createElement('select');
+  for (var i = 0; i < contentCollection.length; i++) {
+    var item = document.createElement('option');
+    item.value = contentCollection[i].value;
+    item.innerHTML = item.value;
+    dropDownList.appendChild(item);
+  }
+  dropDownField.appendChild(dropDownList);
+  return dropDownField;
 }
