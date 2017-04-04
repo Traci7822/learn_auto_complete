@@ -68,19 +68,17 @@ function saveAction(){
   }
   chrome.storage.sync.set(obj, function() {
     console.log('content saved');
-    // ensure it's saving to storage and then fetch for contentCollection
-    // contentCollection.push(obj)
   })
 }
 
 function createMenuField() {
-  var menuElement = document.createElement('div');
+  var menuElement = document.createElement('select');
   menuElement.setAttribute('id', 'menuElement');
   menuElement.setAttribute('style', 'display:none');
   return menuElement;
 }
 
-function appendMenuOptions(parentElement) {
+function appendMenuOptions(parentElement, content = contentCollection) {
   parentElement.innerText = "";
   for (var i = 0; i < contentCollection.length; i++) {
     var item = contentCollection[i];
@@ -95,10 +93,27 @@ function appendMenuOptions(parentElement) {
 function contentAction() {
   appendMenuOptions(document.getElementById('menuElement'));
   displayMenuDiv();
+  filterMenu();
+
   // On input, display filtered results in menuElement
   // Add scroll
   // Allow for selection
   // Return selection to input field
+}
+
+function filterMenu() {
+  if (document.getElementById('menuElement').style.display == 'block') {
+    var input = document.getElementsByTagName('textarea')[1];
+    input.onkeydown = function(event) {
+      var filteredList = [];
+      for (var i = 0; i < contentCollection.length; i++) {
+      // loop through and filter by event target
+      debugger;
+      filteredList.push(content);
+      appendMenuOptions(document.getElementById('menuElement'), filteredList);
+      }
+    }
+  }
 }
 
 function clearContentDiv() {
