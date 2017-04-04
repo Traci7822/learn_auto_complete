@@ -68,7 +68,6 @@ function createMenuElement() {
   menuElement.setAttribute('id', 'menuElement');
   menuElement.setAttribute('style', 'display:none');
   // add event listener for change event to update list
-  // appendMenuOptions(menu);
   // update instead of appending
   menuElement.appendChild(menu);
 
@@ -91,14 +90,12 @@ function contentAction() {
   displayMenuDiv();
 
   //  add scroll
-  // clear backlog
+  // clear backlog, shows 2X on every other click, first click shows nothing
+  appendMenuOptions(document.getElementById('menuElement'));
 
 
   // 2. display filtered results based on imput
-  if (contentCollection.length != 0) {
-    document.getElementById('menuElement').innerHTML = "<select></select>";
-    appendMenuOptions(document.getElementById('menuElement'));
-  }
+
 
   // displayMenuItems();
   // 3. return selection to input field
