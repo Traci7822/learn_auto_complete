@@ -82,9 +82,8 @@ function createMenuElement() {
 function appendMenuOptions(parentElement) {
   // debugger;
   // clearContentDiv();
-// populating every other instance, need to clear before re-appending
+  parentElement.innerText = "";
   for (var i = 0; i < contentCollection.length; i++) {
-    debugger;
     var item = contentCollection[i];
     var element = document.createElement('option');
     element.text = item.value;
