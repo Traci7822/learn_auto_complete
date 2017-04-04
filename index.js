@@ -56,7 +56,8 @@ function saveAction(){
     return;
   }
   chrome.storage.sync.set(obj, function() {
-    console.log('content saved')
+    console.log('content saved');
+    // ensure it's saving to storage and then fetch for contentCollection
     contentCollection.push(obj)
   })
 }
@@ -64,24 +65,10 @@ function createMenuField() {
   var menuElement = document.createElement('div');
   menuElement.setAttribute('id', 'menuElement');
   menuElement.setAttribute('style', 'display:none');
-  // var menu = createMenuElement();
-  // menuElement.appendChild(menu);
   return menuElement;
-}
-// create dropdown w/ display none
-function createMenuElement() {
-  var menu = document.createElement('select');
-  menu.setAttribute('id', 'menu');
-  return menu;
-  // add event listener for change event to update list
-  // update instead of appending
-  // menuElement.appendChild(menu);
-
 }
 
 function appendMenuOptions(parentElement) {
-  // debugger;
-  // clearContentDiv();
   parentElement.innerText = "";
   for (var i = 0; i < contentCollection.length; i++) {
     var item = contentCollection[i];
@@ -94,26 +81,12 @@ function appendMenuOptions(parentElement) {
 }
 
 function contentAction() {
-  event.preventDefault();
   appendMenuOptions(document.getElementById('menuElement'));
-
-  // 1. turn on event watcher for input (toggle on)
   displayMenuDiv();
-  // debugger;
-  //  add scroll
-  // clear backlog, shows 2X on every other click, first click shows nothing
-
-
-  // 2. display filtered results based on imput
-
-
-  // displayMenuItems();
-  // 3. return selection to input field
-
-  // var field = populateDropDown();
-  // var input = document.getElementsByTagName('textarea')[1];
-  // input.appendChild(field);
-  // field not showing up yet
+  // On input, display filtered results in menuElement
+  // Add scroll
+  // Allow for selection
+  // Return selection to input field
 }
 
 function clearContentDiv() {
@@ -128,20 +101,5 @@ function displayMenuDiv() {
   } else {
     menu.style.display = 'block';
   }
+  // Turn on event watcher for input (toggle on)
 }
-
-function displayMenuItems() {
-}
-
-// function populateDropDown() {
-//   var dropDownField = document.createElement('div');
-//   var dropDownList = document.createElement('select');
-//   for (var i = 0; i < contentCollection.length; i++) {
-//     var item = document.createElement('option');
-//     item.value = contentCollection[i].value;
-//     item.innerHTML = item.value;
-//     dropDownList.appendChild(item);
-//   }
-//   dropDownField.appendChild(dropDownList);
-//   return dropDownField;
-// }
