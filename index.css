@@ -38,3 +38,9 @@
   height: 50%;
   width: 50%;
 }
+
+#menu {
+  overflow: visible !important;
+  height: auto !important;
+  width: auto !important;
+}

@@ -5,7 +5,7 @@ var contentCollection = [];
 window.onload = function addSaveContentIcon(){
   event.preventDefault;
   var mediaSection = document.getElementsByClassName('media-block__content');
-  var dropDown = createMenuElement();
+  var dropDown = createMenuField();
   var saveButton = createButtonField('save');
   var contentButton = createButtonField('content');
   mediaSection[4].appendChild(dropDown);
@@ -60,25 +60,34 @@ function saveAction(){
     contentCollection.push(obj)
   })
 }
-
-// create dropdown w/ display none
-function createMenuElement() {
+function createMenuField() {
   var menuElement = document.createElement('div');
-  var menu = document.createElement('select');
   menuElement.setAttribute('id', 'menuElement');
   menuElement.setAttribute('style', 'display:none');
+  // var menu = createMenuElement();
+  // menuElement.appendChild(menu);
+  return menuElement;
+}
+// create dropdown w/ display none
+function createMenuElement() {
+  var menu = document.createElement('select');
+  menu.setAttribute('id', 'menu');
+  return menu;
   // add event listener for change event to update list
   // update instead of appending
-  menuElement.appendChild(menu);
+  // menuElement.appendChild(menu);
 
-  return menuElement;
 }
 
 function appendMenuOptions(parentElement) {
+  // debugger;
+  // clearContentDiv();
+// populating every other instance, need to clear before re-appending
   for (var i = 0; i < contentCollection.length; i++) {
+    debugger;
     var item = contentCollection[i];
     var element = document.createElement('option');
-    element.textContent = item.value;
+    element.text = item.value;
     element.value = item.value;
     parentElement.appendChild(element);
   }
@@ -86,12 +95,14 @@ function appendMenuOptions(parentElement) {
 }
 
 function contentAction() {
+  event.preventDefault();
+  appendMenuOptions(document.getElementById('menuElement'));
+
   // 1. turn on event watcher for input (toggle on)
   displayMenuDiv();
-
+  // debugger;
   //  add scroll
   // clear backlog, shows 2X on every other click, first click shows nothing
-  appendMenuOptions(document.getElementById('menuElement'));
 
 
   // 2. display filtered results based on imput
@@ -104,6 +115,11 @@ function contentAction() {
   // var input = document.getElementsByTagName('textarea')[1];
   // input.appendChild(field);
   // field not showing up yet
+}
+
+function clearContentDiv() {
+  var content = document.getElementById('menuElement');
+  content.innerHTML = "";
 }
 
 function displayMenuDiv() {
