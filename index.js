@@ -5,12 +5,23 @@ var contentCollection = [];
 window.onload = function addSaveContentIcon(){
   event.preventDefault;
   var mediaSection = document.getElementsByClassName('media-block__content');
+  getValues();
   var dropDown = createMenuField();
   var saveButton = createButtonField('save');
   var contentButton = createButtonField('content');
   mediaSection[4].appendChild(dropDown);
   mediaSection[4].appendChild(saveButton);
   mediaSection[4].prepend(contentButton);
+
+}
+
+function getValues() {
+  chrome.storage.sync.get(null, function(items) {
+    for (key in items) {
+      contentCollection.push(key);
+      console.log(key);
+    }
+  })
 }
 
 function createButtonField(type) {
@@ -50,7 +61,7 @@ function createImage(type) {
 function saveAction(){
   var content = document.getElementsByTagName('textarea')[1].value;
   var obj = {};
-  obj['value'] = content;
+  obj[content] = content;
   if (content.length <= 1) {
     console.log('Error: No content selected');
     return;
@@ -58,9 +69,10 @@ function saveAction(){
   chrome.storage.sync.set(obj, function() {
     console.log('content saved');
     // ensure it's saving to storage and then fetch for contentCollection
-    contentCollection.push(obj)
+    // contentCollection.push(obj)
   })
 }
+
 function createMenuField() {
   var menuElement = document.createElement('div');
   menuElement.setAttribute('id', 'menuElement');
@@ -73,8 +85,8 @@ function appendMenuOptions(parentElement) {
   for (var i = 0; i < contentCollection.length; i++) {
     var item = contentCollection[i];
     var element = document.createElement('option');
-    element.text = item.value;
-    element.value = item.value;
+    element.text = item;
+    element.value = item;
     parentElement.appendChild(element);
   }
   return parentElement
