@@ -4,8 +4,8 @@ var contentCollection = [];
 
 window.onload = function addSaveContentIcon(){
   event.preventDefault;
-  var mediaSection = document.getElementsByClassName('media-block__content');
   getValues();
+  var mediaSection = document.getElementsByClassName('media-block__content');
   var dropDown = createMenuField();
   var saveButton = createButtonField('save');
   var contentButton = createButtonField('content');
@@ -14,11 +14,9 @@ window.onload = function addSaveContentIcon(){
   mediaSection[4].prepend(contentButton);
 
 }
-function getMenu() {
-  return document.getElementById('menuElement');
-}
 
 function getValues() {
+  contentCollection = [];
   chrome.storage.sync.get(null, function(items) {
     for (key in items) {
       contentCollection.push(key);
@@ -75,13 +73,6 @@ function saveAction(){
   refreshMenuDiv();
 }
 
-function refreshMenuDiv() {
-  getValues();
-  var menu = getMenu();
-  newMenu = appendMenuOptions(menu);
-  menu.innerHTML = newMenu.innerHTML;
-}
-
 function createMenuField() {
   var menuElement = document.createElement('select');
   menuElement.setAttribute('id', 'menuElement');
@@ -89,7 +80,12 @@ function createMenuField() {
   return menuElement;
 }
 
+function getMenu() {
+  return document.getElementById('menuElement');
+}
+
 function appendMenuOptions(parentElement, content = contentCollection) {
+  debugger;
   parentElement.innerText = "";
   for (var i = 0; i < contentCollection.length; i++) {
     var item = contentCollection[i];
@@ -99,6 +95,14 @@ function appendMenuOptions(parentElement, content = contentCollection) {
     parentElement.appendChild(element);
   }
   return parentElement
+}
+
+function refreshMenuDiv() {
+  getValues();
+  var menu = getMenu();
+  newMenu = appendMenuOptions(menu);
+  debugger;
+  menu.innerHTML = newMenu.innerHTML;
 }
 
 function contentAction() {
