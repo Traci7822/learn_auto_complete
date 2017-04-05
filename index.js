@@ -85,7 +85,6 @@ function getMenu() {
 }
 
 function appendMenuOptions(parentElement, content = contentCollection) {
-  debugger;
   parentElement.innerText = "";
   for (var i = 0; i < contentCollection.length; i++) {
     var item = contentCollection[i];
@@ -109,6 +108,8 @@ function contentAction() {
   var menu = getMenu();
   appendMenuOptions(menu);
   displayMenuDiv();
+  // getSelection(menu);
+  // debugger;
   // filterMenu();
 
   // On input, display filtered results in menuElement
@@ -144,6 +145,15 @@ function displayMenuDiv() {
     menu.style.display = 'none';
   } else {
     menu.style.display = 'block';
+    menu.addEventListener('change', function(event) {
+      getSelection(event);
+    })
+
   }
   // Turn on event watcher for input (toggle on)
+}
+
+function getSelection(event){
+  var selection = event.target.value;
+  document.getElementsByTagName('textarea')[1].value = selection;
 }
