@@ -69,6 +69,14 @@ function saveAction(){
   chrome.storage.sync.set(obj, function() {
     console.log('content saved');
   })
+  refreshMenuDiv();
+}
+
+function refreshMenuDiv() {
+  var menu = document.getElementById('menuElement');
+  getValues();
+  newMenu = appendMenuOptions(menu);
+  menu.innerHTML = newMenu.innerHTML;
 }
 
 function createMenuField() {
@@ -93,7 +101,7 @@ function appendMenuOptions(parentElement, content = contentCollection) {
 function contentAction() {
   appendMenuOptions(document.getElementById('menuElement'));
   displayMenuDiv();
-  filterMenu();
+  // filterMenu();
 
   // On input, display filtered results in menuElement
   // Add scroll
