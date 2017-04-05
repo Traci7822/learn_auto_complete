@@ -14,6 +14,9 @@ window.onload = function addSaveContentIcon(){
   mediaSection[4].prepend(contentButton);
 
 }
+function getMenu() {
+  return document.getElementById('menuElement');
+}
 
 function getValues() {
   chrome.storage.sync.get(null, function(items) {
@@ -73,8 +76,8 @@ function saveAction(){
 }
 
 function refreshMenuDiv() {
-  var menu = document.getElementById('menuElement');
   getValues();
+  var menu = getMenu();
   newMenu = appendMenuOptions(menu);
   menu.innerHTML = newMenu.innerHTML;
 }
@@ -99,7 +102,8 @@ function appendMenuOptions(parentElement, content = contentCollection) {
 }
 
 function contentAction() {
-  appendMenuOptions(document.getElementById('menuElement'));
+  var menu = getMenu();
+  appendMenuOptions(menu);
   displayMenuDiv();
   // filterMenu();
 
@@ -110,7 +114,8 @@ function contentAction() {
 }
 
 function filterMenu() {
-  if (document.getElementById('menuElement').style.display == 'block') {
+  var menu = getMenu();
+  if (menu.style.display == 'block') {
     var input = document.getElementsByTagName('textarea')[1];
     input.onkeydown = function(event) {
       var filteredList = [];
@@ -118,19 +123,19 @@ function filterMenu() {
       // loop through and filter by event target
       debugger;
       filteredList.push(content);
-      appendMenuOptions(document.getElementById('menuElement'), filteredList);
+      appendMenuOptions(menu, filteredList);
       }
     }
   }
 }
 
 function clearContentDiv() {
-  var content = document.getElementById('menuElement');
+  var content = getMenu();
   content.innerHTML = "";
 }
 
 function displayMenuDiv() {
-  var menu = document.getElementById('menuElement');
+  var menu = getMenu();
   if (menu.style.display == 'block' || menu.style.display == '') {
     menu.style.display = 'none';
   } else {
