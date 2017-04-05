@@ -39,17 +39,18 @@
   width: 50%;
 }
 
-#menu {
+/*#menu {
   overflow: visible !important;
   height: auto !important;
   width: auto !important;
   border: 1px solid green;
 
-}
+}*/
 
 #menuElement {
   border: 1px solid black;
-  height: 100px;
+  height: auto;
   margin-top: 50px;
   width: 75%;
+  float: left;
 }
