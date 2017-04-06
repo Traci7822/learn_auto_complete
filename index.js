@@ -1,4 +1,7 @@
 // add remove feature
+// remove jquery if not used
+// Add scroll
+// fix autocomplete listener
 
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 var content_image_url = 'https://c1.staticflickr.com/4/3943/33793771665_e25336d636_t.jpg';
@@ -15,7 +18,6 @@ window.onload = function addSaveContentIcon(){
   mediaSection[4].appendChild(dropDown);
   mediaSection[4].appendChild(saveButton);
   mediaSection[4].prepend(contentButton);
-
 }
 
 function getValues() {
@@ -78,7 +80,7 @@ function saveAction(){
     console.log('content saved');
   })
   refreshMenuDiv();
-  // need to refresh and add new content to menu (adding whole div again after re-load)
+  // Option to contribute: reset menu upon save w/o toggling menu
 }
 
 function createMenuField() {
@@ -118,11 +120,11 @@ function contentAction() {
   var menu = getMenu();
   appendMenuOptions(menu);
   displayMenuDiv();
-
-  // Add scroll
 }
 
 function filterMenu() {
+  // only filters after toggling a few times
+
   resetCollection(filteredList);
   var menu = getMenu();
   if (menu.style.display == 'block') {
@@ -151,12 +153,13 @@ function displayMenuDiv() {
     menu.style.display = 'none';
   } else {
     menu.style.display = 'block';
+    input.addEventListener('change', function(event) {
+      // need to initiate sooner, missing first input
+      filterMenu();
+    })
     menu.addEventListener('change', function(event) {
       getSelection(event);
     });
-    input.addEventListener('change', function(event) {
-      filterMenu();
-    })
   }
 }
 
