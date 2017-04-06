@@ -1,3 +1,5 @@
+// add remove feature
+
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 var content_image_url = 'https://c1.staticflickr.com/4/3943/33793771665_e25336d636_t.jpg';
 var contentCollection = [];
@@ -76,6 +78,7 @@ function saveAction(){
     console.log('content saved');
   })
   refreshMenuDiv();
+  // need to refresh and add new content to menu (adding whole div again after re-load)
 }
 
 function createMenuField() {
@@ -91,8 +94,9 @@ function getMenu() {
 
 function appendMenuOptions(parentElement, content = contentCollection) {
   parentElement.innerText = "";
-  for (var i = 0; i < content.length; i++) {
-    var item = content[i];
+  var uniqueContents = [...new Set(content)];
+  for (var i = 0; i < uniqueContents.length; i++) {
+    var item = uniqueContents[i];
     var element = document.createElement('option');
     element.text = item;
     element.value = item;
@@ -101,10 +105,12 @@ function appendMenuOptions(parentElement, content = contentCollection) {
   return parentElement
 }
 
+
+
 function refreshMenuDiv() {
   getValues();
   var menu = getMenu();
-  newMenu = appendMenuOptions(menu);
+  var newMenu = appendMenuOptions(menu);
   menu.innerHTML = newMenu.innerHTML;
 }
 
@@ -113,11 +119,7 @@ function contentAction() {
   appendMenuOptions(menu);
   displayMenuDiv();
 
-  // filterMenu();
-
-  // On input, display filtered results in menuElement
   // Add scroll
-
 }
 
 function filterMenu() {
@@ -128,24 +130,11 @@ function filterMenu() {
     input.oninput = function(event) {
       var filteredList = isIncluded(event);
       appendMenuOptions(menu, filteredList);
-
     }
-    // input.onkeydown = function(event) {
-    //
-    //   //need to set filter action
-    //
-    //   // for (var i = 0; i < contentCollection.length; i++) {
-    //   //   contentCollection.filter()
-    //   //   if (contentCollection[i].includes(event.key)) {
-    //   //     filteredList.push(contentCollection[i]);
-    //   //   }
-    //   // }
-    // }
   }
 }
 
 function isIncluded(event) {
-  // need to check for whole event key, not just one letter, returning invalid for more inputs
   var newList = [];
   for (var i = 0; i < contentCollection.length; i++) {
     if (contentCollection[i].search(event.target.value) > -1) {
@@ -154,10 +143,6 @@ function isIncluded(event) {
   }
   return newList;
 }
-// function clearContentDiv() {
-//   var content = getMenu();
-//   content.innerHTML = "";
-// }
 
 function displayMenuDiv() {
   var menu = getMenu();
