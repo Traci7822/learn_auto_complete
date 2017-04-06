@@ -25,7 +25,7 @@
   "content_scripts": [
     {
       "matches": ["https://learn.co/expert-chat"],
-      "js": [ "index.js" ],
+      "js": [ "index.js", "jquery-3.2.0.min.js" ],
       "css": ["index.css"]
     }
   ],
