@@ -1,6 +1,7 @@
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 var content_image_url = 'https://c1.staticflickr.com/4/3943/33793771665_e25336d636_t.jpg';
 var contentCollection = [];
+var filteredList = [];
 
 window.onload = function addSaveContentIcon(){
   event.preventDefault;
@@ -16,13 +17,17 @@ window.onload = function addSaveContentIcon(){
 }
 
 function getValues() {
-  contentCollection = [];
+  resetCollection(contentCollection);
   chrome.storage.sync.get(null, function(items) {
     for (key in items) {
       contentCollection.push(key);
       console.log(key);
     }
   })
+}
+
+function resetCollection(collection) {
+  collection = [];
 }
 
 function createButtonField(type) {
@@ -86,8 +91,8 @@ function getMenu() {
 
 function appendMenuOptions(parentElement, content = contentCollection) {
   parentElement.innerText = "";
-  for (var i = 0; i < contentCollection.length; i++) {
-    var item = contentCollection[i];
+  for (var i = 0; i < content.length; i++) {
+    var item = content[i];
     var element = document.createElement('option');
     element.text = item;
     element.value = item;
@@ -100,7 +105,6 @@ function refreshMenuDiv() {
   getValues();
   var menu = getMenu();
   newMenu = appendMenuOptions(menu);
-  debugger;
   menu.innerHTML = newMenu.innerHTML;
 }
 
@@ -108,49 +112,67 @@ function contentAction() {
   var menu = getMenu();
   appendMenuOptions(menu);
   displayMenuDiv();
-  // getSelection(menu);
-  // debugger;
+
   // filterMenu();
 
   // On input, display filtered results in menuElement
   // Add scroll
-  // Allow for selection
-  // Return selection to input field
+
 }
 
 function filterMenu() {
+  resetCollection(filteredList);
   var menu = getMenu();
   if (menu.style.display == 'block') {
     var input = document.getElementsByTagName('textarea')[1];
-    input.onkeydown = function(event) {
-      var filteredList = [];
-      for (var i = 0; i < contentCollection.length; i++) {
-      // loop through and filter by event target
-      debugger;
-      filteredList.push(content);
+    input.oninput = function(event) {
+      var filteredList = isIncluded(event);
       appendMenuOptions(menu, filteredList);
-      }
+
     }
+    // input.onkeydown = function(event) {
+    //
+    //   //need to set filter action
+    //
+    //   // for (var i = 0; i < contentCollection.length; i++) {
+    //   //   contentCollection.filter()
+    //   //   if (contentCollection[i].includes(event.key)) {
+    //   //     filteredList.push(contentCollection[i]);
+    //   //   }
+    //   // }
+    // }
   }
 }
 
-function clearContentDiv() {
-  var content = getMenu();
-  content.innerHTML = "";
+function isIncluded(event) {
+  // need to check for whole event key, not just one letter, returning invalid for more inputs
+  var newList = [];
+  for (var i = 0; i < contentCollection.length; i++) {
+    if (contentCollection[i].search(event.target.value) > -1) {
+      newList.push(contentCollection[i]);
+    }
+  }
+  return newList;
 }
+// function clearContentDiv() {
+//   var content = getMenu();
+//   content.innerHTML = "";
+// }
 
 function displayMenuDiv() {
   var menu = getMenu();
+  var input = document.getElementsByTagName('textarea')[1];
   if (menu.style.display == 'block' || menu.style.display == '') {
     menu.style.display = 'none';
   } else {
     menu.style.display = 'block';
     menu.addEventListener('change', function(event) {
       getSelection(event);
+    });
+    input.addEventListener('change', function(event) {
+      filterMenu();
     })
-
   }
-  // Turn on event watcher for input (toggle on)
 }
 
 function getSelection(event){
