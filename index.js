@@ -1,7 +1,6 @@
 // add remove feature
 // remove jquery if not used
 // Add scroll
-// fix autocomplete listener
 
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 var content_image_url = 'https://c1.staticflickr.com/4/3943/33793771665_e25336d636_t.jpg';
