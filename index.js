@@ -92,6 +92,8 @@ function createMenuField() {
 
 function getMenu() {
   return document.getElementById('menuElement');
+  debugger;
+
 }
 
 function appendMenuOptions(parentElement, content = contentCollection) {
