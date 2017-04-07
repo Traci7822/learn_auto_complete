@@ -98,6 +98,7 @@ function getMenu() {
 
 function appendMenuOptions(parentElement, content = contentCollection) {
   parentElement.innerText = "";
+  content.unshift(" ");
   var uniqueContents = [...new Set(content)];
   for (var i = 0; i < uniqueContents.length; i++) {
     var item = uniqueContents[i];
@@ -125,8 +126,6 @@ function contentAction() {
 }
 
 function filterMenu() {
-  // only filters after toggling a few times
-
   resetCollection(filteredList);
   var menu = getMenu();
   if (menu.style.display == 'block') {
@@ -134,6 +133,9 @@ function filterMenu() {
     input.oninput = function(event) {
       var filteredList = isIncluded(event);
       appendMenuOptions(menu, filteredList);
+      menu.addEventListener('change', function(event) {
+        getSelection(event);
+      });
     }
   }
 }
@@ -163,6 +165,7 @@ function displayMenuDiv() {
       getSelection(event);
     });
   }
+  debugger;
 }
 
 function getSelection(event){
