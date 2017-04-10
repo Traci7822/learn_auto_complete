@@ -1,5 +1,4 @@
 // add remove feature
-// remove jquery if not used
 // Add scroll
 
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
@@ -157,7 +156,7 @@ function displayMenuDiv() {
     menu.style.display = 'block';
     input.value = " ";
     input.addEventListener('change', function(event) {
-      // this.value = this.value + ' ';
+      // figure out why it only sometimes filters
       // need to initiate sooner, missing first input
       filterMenu();
     })
