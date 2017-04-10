@@ -120,6 +120,7 @@ function contentAction() {
   var menu = getMenu();
   appendMenuOptions(menu);
   displayMenuDiv();
+  // resetInput();
 }
 
 function filterMenu() {
@@ -154,7 +155,9 @@ function displayMenuDiv() {
     menu.style.display = 'none';
   } else {
     menu.style.display = 'block';
+    input.value = " ";
     input.addEventListener('change', function(event) {
+      // this.value = this.value + ' ';
       // need to initiate sooner, missing first input
       filterMenu();
     })
@@ -167,4 +170,9 @@ function displayMenuDiv() {
 function getSelection(event){
   var selection = event.target.value;
   document.getElementsByTagName('textarea')[1].value = selection;
+}
+
+function resetInput() {
+  var input = document.getElementsByTagName('textarea')[1];
+  input.value = " ";
 }
