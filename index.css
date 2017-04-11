@@ -54,3 +54,11 @@
   width: 75%;
   float: left;
 }
+
+#removebutton {
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  bottom: 50px;
+  right: 175px;
+}

@@ -1,13 +1,27 @@
 // add remove feature
 // Add scroll
+//escape parenthesis to counter invalid RegExp
 
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 var content_image_url = 'https://c1.staticflickr.com/4/3943/33793771665_e25336d636_t.jpg';
 var contentCollection = [];
 var filteredList = [];
+// var activeChat = document.getElementsByClassName('active');
 
-window.onload = function addSaveContentIcon(){
+
+
+window.onload = function(){
   event.preventDefault;
+  loadExtension();
+  // check if this is working:
+  var nodes = document.getElementsByClassName('fc--question-node');
+  for (var i = 0; i < nodes.length; i++) {
+    nodes[i].on('click', refreshMenuDiv());
+  }
+}
+
+
+function loadExtension() {
   getValues();
   var mediaSection = document.getElementsByClassName('media-block__content');
   var dropDown = createMenuField();
@@ -102,10 +116,10 @@ function appendMenuOptions(parentElement, content = contentCollection) {
     element.text = item;
     element.value = item;
     parentElement.appendChild(element);
+    // parentElement[i].appendChild(removeButton);
   }
   return parentElement
 }
-
 
 
 function refreshMenuDiv() {
@@ -164,12 +178,37 @@ function displayMenuDiv() {
       getSelection(event);
     });
   }
+  createRemoveButton();
 }
 
 function getSelection(event){
   var selection = event.target.value;
   document.getElementsByTagName('textarea')[1].value = selection;
 }
+function removeContent() {
+  var content = document.getElementsByTagName('textarea')[1].value;
+  if (confirm('Are you sure you want to delete this item?')) {
+    chrome.storage.sync.remove(content, function() {
+      debugger;
+      alert('content deleted');
+    })
+  }
+
+}
+
+function createRemoveButton(){
+  var menu = getMenu();
+  var xButton = document.createElement('button');
+  xButton.value = "x";
+  xButton.setAttribute('id', 'removebutton');
+  xButton.innerHTML = "x";
+  xButton.onclick = function() {
+    removeContent();
+  };
+  menu.parentElement.prepend(xButton);
+}
+
+
 
 function resetInput() {
   var input = document.getElementsByTagName('textarea')[1];
