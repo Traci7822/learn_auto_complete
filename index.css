@@ -56,9 +56,24 @@
 }
 
 #removebutton {
-  height: 20px;
+  height: 5px;
   width: 20px;
   position: absolute;
   bottom: 50px;
   right: 175px;
+  background: #3498db;
+  border-radius: 10px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding-bottom: 25px;
+  /*padding: 10px 20px 10px 20px;*/
+  text-decoration: none;
+}
+
+#removebutton:hover {
+  background: #3cb0fd;
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+  cursor: pointer;
 }

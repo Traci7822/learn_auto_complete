@@ -1,5 +1,3 @@
-// add remove feature
-// Add scroll
 //escape parenthesis to counter invalid RegExp
 
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
@@ -7,8 +5,6 @@ var content_image_url = 'https://c1.staticflickr.com/4/3943/33793771665_e25336d6
 var contentCollection = [];
 var filteredList = [];
 // var activeChat = document.getElementsByClassName('active');
-
-
 
 window.onload = function(){
   event.preventDefault;
@@ -19,7 +15,6 @@ window.onload = function(){
     nodes[i].on('click', refreshMenuDiv());
   }
 }
-
 
 function loadExtension() {
   getValues();
@@ -58,6 +53,8 @@ function createButton(type){
   button.appendChild(image);
   button.id = `${type}_button`;
   button.style = "cursor: pointer";
+  var titleName = type.charAt(0).toUpperCase() + type.slice(1);
+  button.setAttribute('title', `${titleName}`);
   button.onclick = function(event){
     var type = event.target.id.split("_")[0];
     eval(type + 'Action()');
@@ -116,7 +113,6 @@ function appendMenuOptions(parentElement, content = contentCollection) {
     element.text = item;
     element.value = item;
     parentElement.appendChild(element);
-    // parentElement[i].appendChild(removeButton);
   }
   return parentElement
 }
@@ -133,7 +129,6 @@ function contentAction() {
   var menu = getMenu();
   appendMenuOptions(menu);
   displayMenuDiv();
-  // resetInput();
 }
 
 function filterMenu() {
@@ -187,10 +182,10 @@ function getSelection(event){
 }
 function removeContent() {
   var content = document.getElementsByTagName('textarea')[1].value;
-  if (confirm('Are you sure you want to delete this item?')) {
+  if (confirm('Are you sure you want to delete this item?') && content != " ") {
     chrome.storage.sync.remove(content, function() {
-      alert('content deleted');
       refreshWindow();
+      alert('content deleted');
     })
   }
 }
@@ -201,6 +196,7 @@ function createRemoveButton(){
   xButton.value = "x";
   xButton.setAttribute('id', 'removebutton');
   xButton.innerHTML = "x";
+  xButton.setAttribute('title', 'Remove content');
   xButton.onclick = function() {
     removeContent();
   };
@@ -210,7 +206,6 @@ function createRemoveButton(){
 function refreshWindow() {
   window.location.href = window.location.href;
 }
-
 
 function resetInput() {
   var input = document.getElementsByTagName('textarea')[1];
