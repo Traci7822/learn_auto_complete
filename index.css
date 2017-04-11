@@ -6,10 +6,7 @@
 }
 
 #save_button {
-
   position: relative;
-  /*height: 75%;
-  width: 75%;*/
 }
 
 #save_image {
@@ -37,24 +34,14 @@
 
 .content_button_field {
   width: 5%;
-  /*height: auto;*/
   float: left;
-  /*z-index: 2;*/
 }
 
 #content_image {
   position: relative;
-  height: 50%;
-  width: 50%;
+  height: 40%;
+  width: 40%;
 }
-
-/*#menu {
-  overflow: visible !important;
-  height: auto !important;
-  width: auto !important;
-  border: 1px solid green;
-
-}*/
 
 #menuElement {
   border: 1px solid black;
@@ -63,25 +50,3 @@
   width: 75%;
   float: left;
 }
-
-/*#removebutton {
-  height: 5px;
-  width: 20px;
-  position: absolute;
-  bottom: 50px;
-  right: 175px;
-  background: #3498db;
-  border-radius: 10px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  padding-bottom: 25px;
-  text-decoration: none;
-}
-
-#removebutton:hover {
-  background: #3cb0fd;
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none;
-  cursor: pointer;
-}*/
