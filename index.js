@@ -26,6 +26,9 @@ function loadExtension() {
   mediaSection[4].appendChild(dropDown);
   mediaSection[4].appendChild(saveButton);
   mediaSection[4].prepend(contentButton);
+  var removeButton = createButtonField('remove');
+  removeButton.style.visibility = 'hidden';
+  mediaSection[4].appendChild(removeButton);
 }
 
 function getValues() {
@@ -143,6 +146,7 @@ function contentAction() {
   var menu = getMenu();
   appendMenuOptions(menu);
   displayMenuDiv();
+
 }
 
 function filterMenu() {
@@ -175,9 +179,13 @@ function displayMenuDiv() {
   var input = document.getElementsByTagName('textarea')[1];
   if (menu.style.display == 'block' || menu.style.display == '') {
     menu.style.display = 'none';
+    $('.remove_button_field').hide()
+
   } else {
     menu.style.display = 'block';
     input.value = " ";
+    document.getElementsByClassName('remove_button_field')[0].setAttribute('style', 'visibility: "block"')
+
     input.addEventListener('change', function(event) {
       // figure out why it only sometimes filters
       // need to initiate sooner, missing first input
@@ -188,8 +196,7 @@ function displayMenuDiv() {
     });
   }
   // createRemoveButton();
-  var removeButton = createButtonField('remove');
-  menu.parentElement.appendChild(removeButton);
+
 }
 
 function getSelection(event){
