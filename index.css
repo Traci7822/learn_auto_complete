@@ -38,9 +38,10 @@
 }
 
 #content_image {
+  padding-top: 5px;
   position: relative;
-  height: 40%;
-  width: 40%;
+  height: 45%;
+  width: 45%;
 }
 
 #menuElement {
