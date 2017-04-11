@@ -189,11 +189,10 @@ function removeContent() {
   var content = document.getElementsByTagName('textarea')[1].value;
   if (confirm('Are you sure you want to delete this item?')) {
     chrome.storage.sync.remove(content, function() {
-      debugger;
       alert('content deleted');
+      refreshWindow();
     })
   }
-
 }
 
 function createRemoveButton(){
@@ -208,6 +207,9 @@ function createRemoveButton(){
   menu.parentElement.prepend(xButton);
 }
 
+function refreshWindow() {
+  window.location.href = window.location.href;
+}
 
 
 function resetInput() {
