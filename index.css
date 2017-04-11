@@ -17,6 +17,15 @@
   width: 75%;
 }
 
+#remove_image {
+  height: 15%;
+  width: auto;
+  position: absolute;
+  bottom: 50px;
+  padding-left: 10px;
+}
+
+
 .input--textarea-clear {
   position: absolute;
   width: 90%;
@@ -55,7 +64,7 @@
   float: left;
 }
 
-#removebutton {
+/*#removebutton {
   height: 5px;
   width: 20px;
   position: absolute;
@@ -67,7 +76,6 @@
   color: #ffffff;
   font-size: 20px;
   padding-bottom: 25px;
-  /*padding: 10px 20px 10px 20px;*/
   text-decoration: none;
 }
 
@@ -76,4 +84,4 @@
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   text-decoration: none;
   cursor: pointer;
-}
+}*/

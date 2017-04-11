@@ -2,6 +2,7 @@
 
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 var content_image_url = 'https://c1.staticflickr.com/4/3943/33793771665_e25336d636_t.jpg';
+var remove_image_url = 'https://c1.staticflickr.com/4/3684/33135618604_414134ce5c_t.jpg';
 var contentCollection = [];
 var filteredList = [];
 // var activeChat = document.getElementsByClassName('active');
@@ -54,7 +55,7 @@ function createButton(type){
   button.id = `${type}_button`;
   button.style = "cursor: pointer";
   var titleName = type.charAt(0).toUpperCase() + type.slice(1);
-  button.setAttribute('title', `${titleName}`);
+  button.setAttribute('title', `${titleName} content`);
   button.onclick = function(event){
     var type = event.target.id.split("_")[0];
     eval(type + 'Action()');
@@ -90,6 +91,19 @@ function saveAction(){
   })
   refreshMenuDiv();
   // Option to contribute: reset menu upon save w/o toggling menu
+}
+
+function removeAction() {
+  var content = document.getElementsByTagName('textarea')[1].value;
+  if (content != " ") {
+    if (confirm('Are you sure you want to delete this item?')) {
+      chrome.storage.sync.remove(content, function() {
+        // Would like to refresh menu div instead of whole window
+        refreshWindow();
+        alert('content deleted');
+      })
+    }
+  }
 }
 
 function createMenuField() {
@@ -173,21 +187,28 @@ function displayMenuDiv() {
       getSelection(event);
     });
   }
-  createRemoveButton();
+  // createRemoveButton();
+  var removeButton = createButtonField('remove');
+  menu.parentElement.appendChild(removeButton);
 }
 
 function getSelection(event){
   var selection = event.target.value;
   document.getElementsByTagName('textarea')[1].value = selection;
 }
+
 function removeContent() {
-  var content = document.getElementsByTagName('textarea')[1].value;
-  if (confirm('Are you sure you want to delete this item?') && content != " ") {
-    chrome.storage.sync.remove(content, function() {
-      refreshWindow();
-      alert('content deleted');
-    })
-  }
+  // var content = document.getElementsByTagName('textarea')[1].value;
+  // if (content != " ") {
+  //   if (confirm('Are you sure you want to delete this item?')) {
+  //     chrome.storage.sync.remove(content, function() {
+  //       // Would like to refresh menu div instead of whole window
+  //       refreshWindow();
+  //       alert('content deleted');
+  //     })
+  //   }
+  // }
+
 }
 
 function createRemoveButton(){
