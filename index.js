@@ -5,30 +5,43 @@ var content_image_url = 'https://c1.staticflickr.com/4/3943/33793771665_e25336d6
 var remove_image_url = 'https://c1.staticflickr.com/4/3684/33135618604_414134ce5c_t.jpg';
 var contentCollection = [];
 var filteredList = [];
-// var activeChat = document.getElementsByClassName('active');
 
-window.onload = function(){
+  window.onload = function(){
   event.preventDefault;
-  loadExtension();
-  // check if this is working:
-  var nodes = document.getElementsByClassName('fc--question-node');
-  for (var i = 0; i < nodes.length; i++) {
-    nodes[i].on('click', refreshMenuDiv());
+  var mediaSection = document.getElementsByClassName('media-block__content');
+  loadExtension(mediaSection);
+  activeChats();
+}
+function activeChats() {
+  var checkExist = setInterval(function() {
+    if ($('.fc--question-node').length) {
+      checkForActiveQuestion();
+      console.log('questions are loaded');
+      clearInterval(checkExist);
+    }
+  }, 1000);
+}
+
+function checkForActiveQuestion() {
+  if ($('.active').length) {
+  } else {
+    // keeps reloading until question is selected
+    loadExtension();
   }
 }
 
-function loadExtension() {
+function loadExtension(section) {
   getValues();
-  var mediaSection = document.getElementsByClassName('media-block__content');
+  // var mediaSection = document.getElementsByClassName('media-block__content');
   var dropDown = createMenuField();
   var saveButton = createButtonField('save');
   var contentButton = createButtonField('content');
-  mediaSection[4].appendChild(dropDown);
-  mediaSection[4].appendChild(saveButton);
-  mediaSection[4].prepend(contentButton);
+  section[4].appendChild(dropDown);
+  section[4].appendChild(saveButton);
+  section[4].prepend(contentButton);
   var removeButton = createButtonField('remove');
   removeButton.style.visibility = 'hidden';
-  mediaSection[4].appendChild(removeButton);
+  section[4].appendChild(removeButton);
 }
 
 function getValues() {
@@ -73,6 +86,13 @@ function createField(button, type){
   return buttonField;
 }
 
+function createMenuField() {
+  var menuElement = document.createElement('select');
+  menuElement.setAttribute('id', 'menuElement');
+  menuElement.setAttribute('style', 'display:none');
+  return menuElement;
+}
+
 function createImage(type) {
   var image = document.createElement('IMG');
   image.id = `${type}_image`;
@@ -96,6 +116,13 @@ function saveAction(){
   // Option to contribute: reset menu upon save w/o toggling menu
 }
 
+function contentAction() {
+  var menu = getMenu();
+  appendMenuOptions(menu);
+  displayMenuDiv();
+  checkForActiveQuestion();
+}
+
 function removeAction() {
   var content = document.getElementsByTagName('textarea')[1].value;
   if (content != " ") {
@@ -107,13 +134,6 @@ function removeAction() {
       })
     }
   }
-}
-
-function createMenuField() {
-  var menuElement = document.createElement('select');
-  menuElement.setAttribute('id', 'menuElement');
-  menuElement.setAttribute('style', 'display:none');
-  return menuElement;
 }
 
 function getMenu() {
@@ -140,13 +160,6 @@ function refreshMenuDiv() {
   var menu = getMenu();
   var newMenu = appendMenuOptions(menu);
   menu.innerHTML = newMenu.innerHTML;
-}
-
-function contentAction() {
-  var menu = getMenu();
-  appendMenuOptions(menu);
-  displayMenuDiv();
-
 }
 
 function filterMenu() {
@@ -180,12 +193,10 @@ function displayMenuDiv() {
   if (menu.style.display == 'block' || menu.style.display == '') {
     menu.style.display = 'none';
     $('.remove_button_field').hide()
-
   } else {
     menu.style.display = 'block';
     input.value = " ";
-    document.getElementsByClassName('remove_button_field')[0].setAttribute('style', 'visibility: "block"')
-
+    document.getElementsByClassName('remove_button_field')[0].setAttribute('style', 'visibility: "block"');
     input.addEventListener('change', function(event) {
       // figure out why it only sometimes filters
       // need to initiate sooner, missing first input
@@ -195,40 +206,11 @@ function displayMenuDiv() {
       getSelection(event);
     });
   }
-  // createRemoveButton();
-
 }
 
 function getSelection(event){
   var selection = event.target.value;
   document.getElementsByTagName('textarea')[1].value = selection;
-}
-
-function removeContent() {
-  // var content = document.getElementsByTagName('textarea')[1].value;
-  // if (content != " ") {
-  //   if (confirm('Are you sure you want to delete this item?')) {
-  //     chrome.storage.sync.remove(content, function() {
-  //       // Would like to refresh menu div instead of whole window
-  //       refreshWindow();
-  //       alert('content deleted');
-  //     })
-  //   }
-  // }
-
-}
-
-function createRemoveButton(){
-  var menu = getMenu();
-  var xButton = document.createElement('button');
-  xButton.value = "x";
-  xButton.setAttribute('id', 'removebutton');
-  xButton.innerHTML = "x";
-  xButton.setAttribute('title', 'Remove content');
-  xButton.onclick = function() {
-    removeContent();
-  };
-  menu.parentElement.prepend(xButton);
 }
 
 function refreshWindow() {
