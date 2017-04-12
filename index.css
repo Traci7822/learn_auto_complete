@@ -55,3 +55,11 @@
 #js--admin-txt-input {
   width: 80%
 }
+
+.content-filler {
+  height: 30px;
+  position: relative;
+  background: gray;
+  opacity: .4;
+  margin: -5px auto -5 auto;
+}
