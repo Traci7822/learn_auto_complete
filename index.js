@@ -1,4 +1,6 @@
 //escape parenthesis to counter invalid RegExp
+// break sections into divs
+
 
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 var content_image_url = 'https://c1.staticflickr.com/4/3943/33793771665_e25336d636_t.jpg';
@@ -8,8 +10,7 @@ var filteredList = [];
 
   window.onload = function(){
   event.preventDefault;
-  var mediaSection = document.getElementsByClassName('media-block__content');
-  loadExtension(mediaSection);
+  loadExtension();
   activeChats();
 }
 function activeChats() {
@@ -26,22 +27,28 @@ function checkForActiveQuestion() {
   if ($('.active').length) {
   } else {
     // keeps reloading until question is selected
-    loadExtension();
+    var mediaSection = document.getElementsByClassName('media-block__content--fill');
+    if (!mediaSection[0].classList.contains('loaded')) {
+      loadExtension();
+    }
   }
 }
 
-function loadExtension(section) {
+function loadExtension() {
   getValues();
+  var mediaSection = document.getElementsByClassName('media-block__content--fill');
+  // debugger;
   // var mediaSection = document.getElementsByClassName('media-block__content');
   var dropDown = createMenuField();
   var saveButton = createButtonField('save');
   var contentButton = createButtonField('content');
-  section[4].appendChild(dropDown);
-  section[4].appendChild(saveButton);
-  section[4].prepend(contentButton);
+  mediaSection[0].appendChild(dropDown);
+  mediaSection[0].appendChild(saveButton);
+  mediaSection[0].prepend(contentButton);
   var removeButton = createButtonField('remove');
   removeButton.style.visibility = 'hidden';
-  section[4].appendChild(removeButton);
+  mediaSection[0].appendChild(removeButton);
+  mediaSection[0].classList += ' loaded'
 }
 
 function getValues() {

@@ -21,3 +21,6 @@ Noted bugs:
 
 Notes:
 -Toggle the page icon if the menu isn't doing what you expect
+
+-new pull removes options then duplicates them
+-Set the width for input field to avoid overlap
