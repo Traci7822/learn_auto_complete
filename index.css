@@ -1,23 +1,14 @@
-/* need to control for window size */
-/*.save_button_field {
-    width: 5%;
-    float: right;
-    z-index: 2;
-}
-
-#save_button {
-  position: relative;
-}*/
-
 .content-filler {
   height: 30px;
   position: relative;
-  /*background: #D3D3D3;*/
-  /*opacity: .4;*/
   margin: -5px auto -5 auto;
   padding-bottom: 5px;
   display: flex;
   flex-direction: row;
+}
+
+#menu_element {
+  width: 80%;
 }
 
 #save_image {
@@ -31,49 +22,3 @@
   float: left;
   margin-left: 10px;
 }
-
-#menu_element {
-  width: 80%;
-}
-
-/*#remove_image {
-  height: 15%;
-  width: auto;
-  position: absolute;
-  bottom: 50px;
-  padding-left: 10px;
-}*/
-
-
-/*.input--textarea-clear {
-  position: absolute;
-  width: 90%;
-}
-
-#js--file-upload-btn {
-  width: 50%;
-}
-
-.content_button_field {
-  width: 5%;
-  float: left;
-}*/
-
-/*#content_image {*/
-  /*padding-top: 5px;*/
-  /*position: relative;
-  height: 30%;
-  width: 30%;
-}
-
-#menuElement {
-  border: 1px solid black;
-  height: auto;
-  margin-top: 50px;
-  width: 75%;
-  float: left;
-}
-
-#js--admin-txt-input {
-  width: 80%
-}*/

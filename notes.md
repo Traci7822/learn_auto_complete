@@ -8,19 +8,22 @@ Enable the 'Getting started example' extension and reload the Learn Expert chat 
 
 In Learn Chat:
 After typing content you want saved into the text input, click the green down arrow button to save content
-To toggle on the content menu, click the paper icon on the left side of the text input field
 Saved content will appear in the drop down menu, selecting content from the list will output that text to the input field
-If you type in a word in the input field when toggled on then it should filter the dropdown menu to contents containing your input
+If you type in a word in the input field it should filter the dropdown menu to contents containing your input (need to bring this back in)
+Use red x to remove content from storage data
 
-Noted bugs:
--If focused on a question when it is marked resolved it remove the save and dropdown features, refresh brings them back
--Need to mark that content is saved
--entering '@' covers up toggle image
--capital letters not accounted for in autocomplete yet
--need to add remove content options
 
-Notes:
--Toggle the page icon if the menu isn't doing what you expect
 
--new pull removes options then duplicates them
--Set the width for input field to avoid overlap
+
+
+To-Do:
+
+- look at escaping parenthesis to counter invalid RegExp
+- remove blank option from filtered menu
+- integrate autocomplete - filter
+- tab trigger to autocomplete
+- Switch to MutationObserver for checkForResolved() and refreshes
+- change to page action instead of browser action
+- reload menu after saveButton
+- entering '@' covers up toggle image (maybe fixed)
+- capital letters not accounted for in autocomplete yet
