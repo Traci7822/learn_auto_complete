@@ -85,14 +85,27 @@ var contentCollection = ['hi', 'sup', 'fruit'];
    return document.getElementById('menu_element');
  }
 
- function populateDropDownMenu() {
-   for (var i = 0; i < contentCollection.length; i++) {
-     var item = contentCollection[i];
+ function populateDropDownMenu(content = contentCollection) {
+   var uniqueContents = [...new Set(content)];
+   for (var i = 0; i < uniqueContents.length; i++) {
+     var item = uniqueContents[i];
      var element = document.createElement('option');
      element.text = item;
      element.value = item;
      getMenuElement().appendChild(element);
    }
+ }
+
+ function saveAction() {
+   var content = document.getElementsByTagName('textarea')[1].value;
+   var collection = contentCollection;
+   collection.push(content)
+   resetMenu();
+   populateDropDownMenu(collection);
+ }
+
+ function resetMenu() {
+   getMenuElement().innerHTML = " ";
  }
 
  // function createButton(type){
