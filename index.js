@@ -9,18 +9,13 @@
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 // var content_image_url = 'https://c1.staticflickr.com/4/3943/33793771665_e25336d636_t.jpg';
 var remove_image_url = 'https://c1.staticflickr.com/4/3684/33135618604_414134ce5c_t.jpg';
-contentCollection = getValues();
+var contentCollection = getValues();
 // var filteredList = [];
 //
   window.onload = function(){
     buildExtensionField();
     buildContentActions();
-    // getValues();
     populateDropDownMenu();
-  }
-
-  function loadContent() {
-    // getMenuElement();
   }
 
   function buildExtensionField() {
@@ -84,7 +79,6 @@ contentCollection = getValues();
 
  function populateDropDownMenu() {
    contentCollection.unshift(" ");
-   console.log(contentCollection);
    var uniqueContents = [...new Set(contentCollection.sort())];
    for (var i = 0; i < uniqueContents.length; i++) {
      var item = uniqueContents[i];
@@ -103,6 +97,7 @@ contentCollection = getValues();
  }
 
  function reloadMenu() {
+  //  not resetting upon save or remove
    resetMenu();
    populateDropDownMenu();
  }
@@ -133,16 +128,22 @@ contentCollection = getValues();
    obj[content] = content;
    chrome.storage.sync.set(obj, function() {
      console.log('content saved');
+     reloadMenu();
+
    });
-   reloadMenu();
  }
 
  function removeAction() {
    var menu = getMenuElement();
    var value = menu.options[menu.selectedIndex].value;
    menu.remove(menu.selectedIndex);
-  var index = contentCollection.indexOf(value);
-  contentCollection.splice(index, 1);
+   if (value != " ") {
+     if (confirm('Are you sure you want to delete this item?')) {
+       chrome.storage.sync.remove(value, function() {
+         alert('content deleted');
+       })
+     }
+   }
   reloadMenu();
  }
 
