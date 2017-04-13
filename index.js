@@ -1,13 +1,13 @@
 // //escape parenthesis to counter invalid RegExp
-// // break sections into divs
 // //  remove blank option from filtered menu
 // // finesse autocomplete
 // // tab trigger to autocomplete
 // // return focus to input to be able to send w/ a
 // // toggle clears input
+
+// resolved question still unloads the app
 //
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
-// var content_image_url = 'https://c1.staticflickr.com/4/3943/33793771665_e25336d636_t.jpg';
 var remove_image_url = 'https://c1.staticflickr.com/4/3684/33135618604_414134ce5c_t.jpg';
 var contentCollection = getValues();
 // var filteredList = [];
@@ -92,17 +92,17 @@ var contentCollection = getValues();
    })
  }
 
- function resetMenu() {
-   getMenuElement().innerHTML = " ";
- }
+ // function resetMenu() {
+ //   getMenuElement().innerHTML = " ";
+ // }
+ //
+ // function reloadMenu() {
+ //  //  not resetting upon save or remove
+ //   resetMenu();
+ //   populateDropDownMenu();
+ // }
 
- function reloadMenu() {
-  //  not resetting upon save or remove
-   resetMenu();
-   populateDropDownMenu();
- }
-
- function getValues() {
+ function getValues(callback) {
    contentCollection = [];
    chrome.storage.sync.get(null, function(items) {
      var content = Object.keys(items);
@@ -110,11 +110,12 @@ var contentCollection = getValues();
        contentCollection.push(content[i]);
      }
    });
+   callback;
+   console.log(contentCollection);
    return contentCollection;
  }
 
  function getCollection(collection){
-   debugger;
    return collection;
  }
 
@@ -128,9 +129,9 @@ var contentCollection = getValues();
    obj[content] = content;
    chrome.storage.sync.set(obj, function() {
      console.log('content saved');
-     reloadMenu();
-
+    //  reloadMenu();
    });
+  //  reloadDiv();
  }
 
  function removeAction() {
@@ -144,14 +145,23 @@ var contentCollection = getValues();
        })
      }
    }
-  reloadMenu();
+  // reloadMenu();
  }
 
  function setInput() {
    var menu = getMenuElement();
    var value = menu.options[menu.selectedIndex].value;
    document.getElementsByTagName('textarea')[1].value = value;
+   document.getElementsByTagName('textarea')[1].focus();
  }
+
+ // function reloadDiv() {
+ //   console.log('reloading');
+ //   $('.content-filler').remove();
+ //   buildExtensionField();
+ //   buildContentActions();
+ //   getValues(populateDropDownMenu());
+ // }
 
 
 
