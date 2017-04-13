@@ -85,8 +85,8 @@ var contentCollection = ['hi', 'sup', 'fruit'];
    return document.getElementById('menu_element');
  }
 
- function populateDropDownMenu(content = contentCollection) {
-   var uniqueContents = [...new Set(content)];
+ function populateDropDownMenu(contents = contentCollection) {
+   var uniqueContents = [...new Set(contents)];
    for (var i = 0; i < uniqueContents.length; i++) {
      var item = uniqueContents[i];
      var element = document.createElement('option');
@@ -98,14 +98,25 @@ var contentCollection = ['hi', 'sup', 'fruit'];
 
  function saveAction() {
    var content = document.getElementsByTagName('textarea')[1].value;
-   var collection = contentCollection;
-   collection.push(content)
+  //  var collection = contentCollection;
+   contentCollection.push(content)
    resetMenu();
-   populateDropDownMenu(collection);
+   populateDropDownMenu();
  }
 
  function resetMenu() {
    getMenuElement().innerHTML = " ";
+ }
+
+ function removeAction() {
+   var menu = getMenuElement();
+   var value = menu.options[menu.selectedIndex].value;
+   menu.remove(menu.selectedIndex);
+  //  need to remove from storage
+  var index = contentCollection.indexOf(value);
+  contentCollection.splice(index, 1);
+  resetMenu();
+  populateDropDownMenu();
  }
 
  // function createButton(type){
