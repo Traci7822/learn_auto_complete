@@ -9,12 +9,18 @@
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 // var content_image_url = 'https://c1.staticflickr.com/4/3943/33793771665_e25336d636_t.jpg';
 var remove_image_url = 'https://c1.staticflickr.com/4/3684/33135618604_414134ce5c_t.jpg';
-// var contentCollection = [];
+var contentCollection = ['hi', 'sup', 'fruit'];
 // var filteredList = [];
 //
   window.onload = function(){
     buildExtensionField();
     buildContentActions();
+    loadContent();
+  }
+
+  function loadContent() {
+    getMenuElement();
+    populateDropDownMenu();
   }
 
   function buildExtensionField() {
@@ -69,7 +75,24 @@ var remove_image_url = 'https://c1.staticflickr.com/4/3684/33135618604_414134ce5
  function buildMenuField() {
    var menuElement = document.createElement('select');
    menuElement.setAttribute('id', 'menu_element');
+   var firstOption = document.createElement('option');
+   firstOption.value = " ";
+   menuElement.appendChild(firstOption);
    return menuElement;
+ }
+
+ function getMenuElement() {
+   return document.getElementById('menu_element');
+ }
+
+ function populateDropDownMenu() {
+   for (var i = 0; i < contentCollection.length; i++) {
+     var item = contentCollection[i];
+     var element = document.createElement('option');
+     element.text = item;
+     element.value = item;
+     getMenuElement().appendChild(element);
+   }
  }
 
  // function createButton(type){
