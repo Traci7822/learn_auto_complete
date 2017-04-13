@@ -1,0 +1,145 @@
+" "
+1
+:
+"123"
+2
+:
+"2222"
+3
+:
+"3333"
+4
+:
+"12345"
+5
+:
+"A screen share is a virtual meeting with a learn expert, different than a screen shot. If you don't already have the Zoom Client for Meetings, you can get it here: https://zoom.us/download"
+6
+:
+"After you saved the file, did you run `learn` or `learn test` in the console?"
+7
+:
+"Alright can you paste the code you've written as well as the error you're seeing?"
+8
+:
+"Alright so a syntax error anywhere in the document will cause all the tests to fail (even previously passing ones). Paste your code into this site to see where your errors are: repl.it/languages/javascript"
+9
+:
+"Alright there's a little wait at the moment but i'll have someone with you as soon as they’re available"
+10
+:
+"Alright there's a small wait at the moment but I'll have a Learn Expert with you as soon as one is available. If you don't already have the Zoom Client for Meetings, you can get it here: https://zoom.us/download"
+11
+:
+"Alright, can you paste the full error that you're getting?"
+12
+:
+"Alright, can you paste your code and the error that you're getting when you run it?"
+13
+:
+"Alright, can you show me the code that you've written?"
+14
+:
+"Alright, how about a screen share to help troubleshoot this?"
+15
+:
+"Alright, let's see the error that you're getting. "
+16
+:
+"Alright, spy looks for an exact match with the output. Any syntax or punctuation errors will cause it to throw this error message. You can test your code over at repl.it/languages/javascript to see what it's outputting."
+17
+:
+"Any syntax errors in the document will cause the tests to fail on this one, even if they were previously passing. You can test your code over at repl.it/languages/javascript to see where your errors might be"
+18
+:
+"As soon as a learn expert is available they will reach out to you here with a link for you to use to start the screen share"
+19
+:
+"Can you paste the full error message please?"
+20
+:
+"Can you try fully exiting the IDE (`File > Exit` or `ctrl + q`)? Then click the `open` button to relaunch it. "
+21
+:
+"Go ahead and click 'resolve' on this question and feel free to open a new one next time you get stuck :)"
+22
+:
+"Great, I'll have a learn expert with you shortly"
+23
+:
+"How about a screen share to go over this?"
+24
+:
+"How about a screen share to help troubleshoot this?"
+25
+:
+"If there's anything else you need I'd be happy to add you back to the queue, otherwise feel free to click ‘Mark Resolved’ on this question :)"
+26
+:
+"If you don't already have the Zoom Client for Meetings, you can get it here: https://zoom.us/download"
+27
+:
+"If you need anything else I'm happy to help, otherwise go ahead and click 'resolve' on this question and feel free to open a new one next time you get stuck :)"
+28
+:
+"If you'd like I can get you queued up for a screen share to help troubleshoot this"
+29
+:
+"In the console do you see either a blinking cursor or a heart icon?"
+30
+:
+"In the text editor, on the tab at the top with the file name, do you see a blue circle or an 'x' next to the file name?↵"
+31
+:
+"It's the same key as `~` (just don't hold down shift) and enter it 3 times where you type to send a chat and it will open up a code snippet window"
+32
+:
+"It’s been over 24 hours since your last response so I’m going to mark this question as resolved. If you need further assistance please open up a new question and we’ll happily help you out :)"
+33
+:
+"Learn Support is ending for the night but please come back for help in the morning if you're still having trouble with this. If you do resolve this before then, you can close out this question by clicking the green resolve button at the bottom of the chat window. Thanks!"
+34
+:
+"Make sure to use code snippets when pasting code. Use 3 backticks (the key below esc) to open up a code snippet in the chat window. It makes the code much more readable."
+35
+:
+"Ok that's good, that's what a successful pull request looks like. Have you tried refreshing your browser window?"
+36
+:
+"One moment while I take a look"
+37
+:
+"So this is actually a lab error, not a problem with your code. This guide will help you to resolve this issue: http://help.learn.co/workflow-tips/errors/error-timeout-of-2000ms-exceeded"
+38
+:
+"Sometimes a quick restart is all the IDE needs to work properly if something isn't working right"
+39
+:
+"Then a learn expert will send you a link to get started with the screen share"
+40
+:
+"This is actually a lab error, nothing to do with your code. This guide will show you how to resolve this issue: http://help.learn.co/workflow-tips/errors/error-timeout-of-2000ms-exceeded"
+41
+:
+"Try running your code at repl.it/languages/javascript to see where any errors might be↵"
+42
+:
+"Unfortunately, Learn Experts are not available at this time. Please check back in anytime between 9am-1am EST, thanks!"
+43
+:
+"Unfortunately, because this is a portfolio project I am unable to assist with this question. I recommend reaching out to the instructor to get assistance with this issue. "
+44
+:
+"What's the trouble you're running into?"
+45
+:
+"You can check what your code is outputting at https://repl.it/languages/javascript, Spy will be looking for an exact match, so any spelling, punctuation or syntax errors will throw that error. "
+46
+:
+"You can start the session by going here: "
+47
+:
+"You don't need to do anything in the `index-test` file, you should only be writing code in the `index.js` file"
+48
+:
+"You're welcome. If you need anything else I'm happy to help, otherwise go ahead and click 'resolve' on this question and feel free to open a new one next time you get stuck :)"
