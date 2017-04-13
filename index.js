@@ -85,6 +85,7 @@ var contentCollection = ['hi', 'sup', 'fruit'];
  function populateDropDownMenu(contents = contentCollection) {
    contents.unshift(" ");
    var uniqueContents = [...new Set(contents)];
+   uniqueContents.sort();
    for (var i = 0; i < uniqueContents.length; i++) {
      var item = uniqueContents[i];
      var element = document.createElement('option');
