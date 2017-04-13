@@ -75,9 +75,6 @@ var contentCollection = ['hi', 'sup', 'fruit'];
  function buildMenuField() {
    var menuElement = document.createElement('select');
    menuElement.setAttribute('id', 'menu_element');
-   var firstOption = document.createElement('option');
-   firstOption.value = " ";
-   menuElement.appendChild(firstOption);
    return menuElement;
  }
 
@@ -86,6 +83,7 @@ var contentCollection = ['hi', 'sup', 'fruit'];
  }
 
  function populateDropDownMenu(contents = contentCollection) {
+   contents.unshift(" ");
    var uniqueContents = [...new Set(contents)];
    for (var i = 0; i < uniqueContents.length; i++) {
      var item = uniqueContents[i];
@@ -96,28 +94,32 @@ var contentCollection = ['hi', 'sup', 'fruit'];
    }
  }
 
- function saveAction() {
-   var content = document.getElementsByTagName('textarea')[1].value;
-  //  var collection = contentCollection;
-   contentCollection.push(content)
+ function resetMenu() {
+     getMenuElement().innerHTML = " ";
+  }
+
+ function reloadMenu() {
    resetMenu();
    populateDropDownMenu();
  }
 
- function resetMenu() {
-   getMenuElement().innerHTML = " ";
+ function saveAction() {
+   var content = document.getElementsByTagName('textarea')[1].value;
+   contentCollection.push(content)
+   reloadMenu();
  }
 
  function removeAction() {
    var menu = getMenuElement();
    var value = menu.options[menu.selectedIndex].value;
    menu.remove(menu.selectedIndex);
-  //  need to remove from storage
   var index = contentCollection.indexOf(value);
   contentCollection.splice(index, 1);
-  resetMenu();
-  populateDropDownMenu();
+  reloadMenu();
  }
+
+
+
 
  // function createButton(type){
  //   var button = document.createElement('button');
