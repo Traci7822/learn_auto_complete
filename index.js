@@ -33,7 +33,7 @@ var remove_image_url = 'https://c1.staticflickr.com/4/3684/33135618604_414134ce5
     elements.push(createButton('save'));
     elements.push(buildMenuField());
     elements.push(createButton('remove'));
-    appendButtonsToExtension(elements);
+    appendElementsToExtension(elements);
   }
 
   function createButton(type) {
