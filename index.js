@@ -2,11 +2,16 @@
 // //  remove blank option from filtered menu
 // // finesse autocomplete
 // // tab trigger to autocomplete
-// // return focus to input to be able to send w/ a
 // // toggle clears input
 
 // resolved question still unloads the app
 //
+
+// For attaching this drop down, you could maybe attach it to all `#js--admin-txt-input` on the page, and check to re-attach on page mutation?
+//
+// [9:09]
+// Take a look a Nick's gem for page mutation perhaps?
+
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 var remove_image_url = 'https://c1.staticflickr.com/4/3684/33135618604_414134ce5c_t.jpg';
 var contentCollection = getValues();
@@ -16,6 +21,22 @@ var contentCollection = getValues();
     buildExtensionField();
     buildContentActions();
     populateDropDownMenu();
+    checkForResolved();
+  }
+
+  function checkForResolved() {
+    var pageContent = document.getElementById('fc--message-list');
+    var checkQuestions = setInterval(function() {
+      if ($('.fc--question-node').length) {
+        if ($('.active').length) {
+          if (document.getElementById('fc--message-list').textContent.includes('Resolved')) {
+            location.reload();
+          }
+        }
+      }
+      console.log('running');
+    }, 10000)
+    // keep an eye on timer and adjust as needed
   }
 
   function buildExtensionField() {
@@ -111,12 +132,7 @@ var contentCollection = getValues();
      }
    });
    callback;
-   console.log(contentCollection);
    return contentCollection;
- }
-
- function getCollection(collection){
-   return collection;
  }
 
  function saveAction() {
@@ -129,9 +145,8 @@ var contentCollection = getValues();
    obj[content] = content;
    chrome.storage.sync.set(obj, function() {
      console.log('content saved');
-    //  reloadMenu();
    });
-  //  reloadDiv();
+   //  reloadMenu();
  }
 
  function removeAction() {
@@ -155,13 +170,13 @@ var contentCollection = getValues();
    document.getElementsByTagName('textarea')[1].focus();
  }
 
- // function reloadDiv() {
- //   console.log('reloading');
- //   $('.content-filler').remove();
- //   buildExtensionField();
- //   buildContentActions();
- //   getValues(populateDropDownMenu());
- // }
+ function reloadDiv() {
+   console.log('reloading');
+   $('.content-filler').remove();
+   buildExtensionField();
+   buildContentActions();
+   getValues(populateDropDownMenu());
+ }
 
 
 
