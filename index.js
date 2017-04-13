@@ -92,6 +92,9 @@ var contentCollection = ['hi', 'sup', 'fruit'];
      element.value = item;
      getMenuElement().appendChild(element);
    }
+   getMenuElement().addEventListener('change', function() {
+     setInput();
+   })
  }
 
  function resetMenu() {
@@ -116,6 +119,12 @@ var contentCollection = ['hi', 'sup', 'fruit'];
   var index = contentCollection.indexOf(value);
   contentCollection.splice(index, 1);
   reloadMenu();
+ }
+
+ function setInput() {
+   var menu = getMenuElement();
+   var value = menu.options[menu.selectedIndex].value;
+   document.getElementsByTagName('textarea')[1].value = value;
  }
 
 
