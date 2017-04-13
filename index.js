@@ -9,19 +9,18 @@
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 // var content_image_url = 'https://c1.staticflickr.com/4/3943/33793771665_e25336d636_t.jpg';
 var remove_image_url = 'https://c1.staticflickr.com/4/3684/33135618604_414134ce5c_t.jpg';
-contentCollection = ['hi', 'sup', 'fruit'];
+contentCollection = getValues();
 // var filteredList = [];
 //
   window.onload = function(){
     buildExtensionField();
     buildContentActions();
-    getValues();
-    loadContent();
+    // getValues();
+    populateDropDownMenu();
   }
 
   function loadContent() {
-    getMenuElement();
-    populateDropDownMenu();
+    // getMenuElement();
   }
 
   function buildExtensionField() {
