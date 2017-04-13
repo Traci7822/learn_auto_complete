@@ -9,12 +9,13 @@
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 // var content_image_url = 'https://c1.staticflickr.com/4/3943/33793771665_e25336d636_t.jpg';
 var remove_image_url = 'https://c1.staticflickr.com/4/3684/33135618604_414134ce5c_t.jpg';
-var contentCollection = ['hi', 'sup', 'fruit'];
+contentCollection = ['hi', 'sup', 'fruit'];
 // var filteredList = [];
 //
   window.onload = function(){
     buildExtensionField();
     buildContentActions();
+    getValues();
     loadContent();
   }
 
@@ -82,9 +83,10 @@ var contentCollection = ['hi', 'sup', 'fruit'];
    return document.getElementById('menu_element');
  }
 
- function populateDropDownMenu(contents = contentCollection) {
-   contents.unshift(" ");
-   var uniqueContents = [...new Set(contents.sort())];
+ function populateDropDownMenu() {
+   contentCollection.unshift(" ");
+   console.log(contentCollection);
+   var uniqueContents = [...new Set(contentCollection.sort())];
    for (var i = 0; i < uniqueContents.length; i++) {
      var item = uniqueContents[i];
      var element = document.createElement('option');
@@ -98,17 +100,41 @@ var contentCollection = ['hi', 'sup', 'fruit'];
  }
 
  function resetMenu() {
-     getMenuElement().innerHTML = " ";
-  }
+   getMenuElement().innerHTML = " ";
+ }
 
  function reloadMenu() {
    resetMenu();
    populateDropDownMenu();
  }
 
+ function getValues() {
+   contentCollection = [];
+   chrome.storage.sync.get(null, function(items) {
+     var content = Object.keys(items);
+     for (var i = 0; i < content.length; i++) {
+       contentCollection.push(content[i]);
+     }
+   });
+   return contentCollection;
+ }
+
+ function getCollection(collection){
+   debugger;
+   return collection;
+ }
+
  function saveAction() {
    var content = document.getElementsByTagName('textarea')[1].value;
-   contentCollection.push(content)
+   if (content.length <= 1) {
+     console.log('Error: No content selected');
+     return;
+   }
+   var obj = {};
+   obj[content] = content;
+   chrome.storage.sync.set(obj, function() {
+     console.log('content saved');
+   });
    reloadMenu();
  }
 
