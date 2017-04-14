@@ -165,12 +165,15 @@ var contentCollection = getValues();
 
  function attachInputListener() {
    var input = document.getElementsByTagName('textarea')[1];
+   input.value = " ";
    input.addEventListener('change', function(event) {
      filterMenu();
    });
  }
 
  function filterMenu() {
+  //  need to account for upper/lower case
+
    filteredList = [];
    var menu = getMenuElement();
    var input = document.getElementsByTagName('textarea')[1];
