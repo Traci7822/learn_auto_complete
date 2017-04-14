@@ -165,7 +165,6 @@ var contentCollection = getValues();
 
  function attachInputListener() {
    var input = document.getElementsByTagName('textarea')[1];
-   input.value = " ";
    input.addEventListener('change', function(event) {
      filterMenu();
    });
