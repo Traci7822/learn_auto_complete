@@ -1,12 +1,12 @@
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 var remove_image_url = 'https://c1.staticflickr.com/4/3684/33135618604_414134ce5c_t.jpg';
 var contentCollection = getValues();
-// var filteredList = [];
 
   window.onload = function(){
     buildExtensionField();
     buildContentActions();
     populateDropDownMenu();
+    attachInputListener();
     checkForResolved();
   }
 
@@ -84,9 +84,9 @@ var contentCollection = getValues();
    return document.getElementById('menu_element');
  }
 
- function populateDropDownMenu() {
-   contentCollection.unshift(" ");
-   var uniqueContents = [...new Set(contentCollection.sort())];
+ function populateDropDownMenu(content = contentCollection) {
+   content.unshift(" ");
+   var uniqueContents = [...new Set(content.sort())];
    for (var i = 0; i < uniqueContents.length; i++) {
      var item = uniqueContents[i];
      var element = document.createElement('option');
@@ -99,9 +99,9 @@ var contentCollection = getValues();
    })
  }
 
- // function resetMenu() {
- //   getMenuElement().innerHTML = " ";
- // }
+ function resetMenu() {
+   getMenuElement().innerHTML = " ";
+ }
  //
  // function reloadMenu() {
  //   resetMenu();
@@ -161,4 +161,32 @@ var contentCollection = getValues();
    buildExtensionField();
    buildContentActions();
    getValues(populateDropDownMenu());
+ }
+
+ function attachInputListener() {
+   var input = document.getElementsByTagName('textarea')[1];
+   input.addEventListener('change', function(event) {
+     filterMenu();
+   });
+ }
+
+ function filterMenu() {
+   filteredList = [];
+   var menu = getMenuElement();
+   var input = document.getElementsByTagName('textarea')[1];
+   input.oninput = function(event) {
+     var filteredList = isIncluded(event);
+     resetMenu();
+     populateDropDownMenu(filteredList);
+   }
+  //  bring in filter function
+ }
+
+ function isIncluded(event) {
+   var newList = [];
+   for (var i = 0; i < contentCollection.length; i++) {
+     if (contentCollection[i].search(event.target.value) >= 0)
+      newList.push(contentCollection[i])
+   }
+   return newList;
  }
