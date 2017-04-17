@@ -89,7 +89,8 @@ var contentCollection = getValues();
  }
 
  function populateDropDownMenu(content = contentCollection) {
-   content.unshift(" ");
+  //  content.unshift(" ");
+
   //  var content = changeCase('lower');
    var uniqueContents = [...new Set(content.sort())];
    for (var i = 0; i < uniqueContents.length; i++) {
@@ -180,7 +181,6 @@ var contentCollection = getValues();
  }
 
  function filterMenu() {
-  //  need to account for upper/lower case (all to lowercase)
    filteredList = [];
    var menu = getMenuElement();
    var input = document.getElementsByTagName('textarea')[1];
@@ -192,13 +192,14 @@ var contentCollection = getValues();
  }
 
  function isIncluded(event) {
-   var newList = [];
-   var upperCaseArray = changeCase('upper');
-   for (var i = 0; i < upperCaseArray.length; i++) {
-     if (upperCaseArray[i].search(event.target.value.toUpperCase()) >= 0)
-      newList.push(upperCaseArray[i])
+   var newArray = [];
+   for (var i = 0; i < contentCollection.length; i++) {
+     var content = contentCollection[i].toUpperCase();
+     if (content.includes(event.target.value.toUpperCase())) {
+       newArray.push(contentCollection[i]);
+     }
    }
-   return newList;
+   return newArray;
  }
 
  function getUpperCaseArray() {
