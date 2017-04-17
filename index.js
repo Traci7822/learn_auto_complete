@@ -1,4 +1,3 @@
-// filter capitalization
 // keyboard shortcuts for save and delete
 // set focus back to iput after save
 
@@ -89,9 +88,7 @@ var contentCollection = getValues();
  }
 
  function populateDropDownMenu(content = contentCollection) {
-  //  content.unshift(" ");
-
-  //  var content = changeCase('lower');
+   content.unshift(" ");
    var uniqueContents = [...new Set(content.sort())];
    for (var i = 0; i < uniqueContents.length; i++) {
      var item = uniqueContents[i];
@@ -102,6 +99,7 @@ var contentCollection = getValues();
    }
    getMenuElement().addEventListener('change', function() {
      setInput();
+     focusOnInput();
    })
  }
 
@@ -138,7 +136,7 @@ var contentCollection = getValues();
      alert('content saved');
      console.log('content saved');
    });
-   //  reloadMenu();
+   focusOnInput();
  }
 
  function removeAction() {
@@ -147,18 +145,19 @@ var contentCollection = getValues();
    menu.remove(menu.selectedIndex);
    if (value != " ") {
      if (confirm('Are you sure you want to delete this item?')) {
-       chrome.storage.sync.remove(value, function() {
-         alert('content deleted');
-       })
+       chrome.storage.sync.remove(value, function() {});
      }
    }
   // reloadMenu();
  }
 
- function setInput() {
-   var menu = getMenuElement();
-   var value = menu.options[menu.selectedIndex].value;
+ function setInput(){
+   var value = getMenuElement().options[getMenuElement().selectedIndex].value;
    document.getElementsByTagName('textarea')[1].value = value;
+ }
+
+ function focusOnInput() {
+   var menu = getMenuElement();
    document.getElementsByTagName('textarea')[1].focus();
  }
 
