@@ -90,8 +90,7 @@ var contentCollection = getValues();
 
  function populateDropDownMenu(content = contentCollection) {
    content.unshift(" ");
-   var content = changeCase('lower');
-   //  need to troubleshoot why it's not returning regularly formatted text
+  //  var content = changeCase('lower');
    var uniqueContents = [...new Set(content.sort())];
    for (var i = 0; i < uniqueContents.length; i++) {
      var item = uniqueContents[i];
