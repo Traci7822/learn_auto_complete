@@ -1,3 +1,6 @@
+// filter capitalization
+// keyboard shortcuts for save and delete
+
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 var remove_image_url = 'https://c1.staticflickr.com/4/3684/33135618604_414134ce5c_t.jpg';
 var contentCollection = getValues();
@@ -129,6 +132,7 @@ var contentCollection = getValues();
    var obj = {};
    obj[content] = content;
    chrome.storage.sync.set(obj, function() {
+     alert('content saved');
      console.log('content saved');
    });
    //  reloadMenu();
@@ -168,6 +172,10 @@ var contentCollection = getValues();
    input.addEventListener('change', function(event) {
      filterMenu();
    });
+  //  listen for enter and clear
+  input.addEventListener('keydown', function(e) {
+    detectEnter(clearInput);
+  })
  }
 
  function filterMenu() {
@@ -181,7 +189,6 @@ var contentCollection = getValues();
      resetMenu();
      populateDropDownMenu(filteredList);
    }
-  //  bring in filter function
  }
 
  function isIncluded(event) {
@@ -191,4 +198,16 @@ var contentCollection = getValues();
       newList.push(contentCollection[i])
    }
    return newList;
+ }
+
+ function clearInput() {
+   debugger;
+   var input = document.getElementsByTagName('textarea')[1].value == " ";
+ }
+
+ function detectEnter(callback){
+   var key = e.which || e.keyCode;
+   if (key == 13) {
+     callback();
+   }
  }
