@@ -174,13 +174,12 @@ var contentCollection = getValues();
    });
   //  listen for enter and clear
   input.addEventListener('keydown', function(e) {
-    detectEnter(clearInput);
+    detectEnterAndClear(event);
   })
  }
 
  function filterMenu() {
-  //  need to account for upper/lower case
-
+  //  need to account for upper/lower case (all to lowercase)
    filteredList = [];
    var menu = getMenuElement();
    var input = document.getElementsByTagName('textarea')[1];
@@ -201,13 +200,16 @@ var contentCollection = getValues();
  }
 
  function clearInput() {
-   debugger;
+   event.preventDefault();
    var input = document.getElementsByTagName('textarea')[1].value == " ";
+   if (input.value != undefined) {
+     input.value = undefined
+   }
  }
 
- function detectEnter(callback){
+ function detectEnterAndClear(e){
    var key = e.which || e.keyCode;
    if (key == 13) {
-     callback();
+     clearInput();
    }
  }
