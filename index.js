@@ -1,5 +1,6 @@
 // filter capitalization
 // keyboard shortcuts for save and delete
+// set focus back to iput after save
 
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 var remove_image_url = 'https://c1.staticflickr.com/4/3684/33135618604_414134ce5c_t.jpg';
@@ -89,6 +90,8 @@ var contentCollection = getValues();
 
  function populateDropDownMenu(content = contentCollection) {
    content.unshift(" ");
+   var content = changeCase('lower');
+   //  need to troubleshoot why it's not returning regularly formatted text
    var uniqueContents = [...new Set(content.sort())];
    for (var i = 0; i < uniqueContents.length; i++) {
      var item = uniqueContents[i];
@@ -172,7 +175,6 @@ var contentCollection = getValues();
    input.addEventListener('change', function(event) {
      filterMenu();
    });
-  //  listen for enter and clear
   input.addEventListener('keydown', function(e) {
     detectEnterAndClear(event);
   })
@@ -192,11 +194,34 @@ var contentCollection = getValues();
 
  function isIncluded(event) {
    var newList = [];
-   for (var i = 0; i < contentCollection.length; i++) {
-     if (contentCollection[i].search(event.target.value) >= 0)
-      newList.push(contentCollection[i])
+   var upperCaseArray = changeCase('upper');
+   for (var i = 0; i < upperCaseArray.length; i++) {
+     if (upperCaseArray[i].search(event.target.value.toUpperCase()) >= 0)
+      newList.push(upperCaseArray[i])
    }
    return newList;
+ }
+
+ function getUpperCaseArray() {
+   var newArray = [];
+   for (var i = 0; i < contentCollection.length; i++) {
+     newArray.push(contentCollection[i].toUpperCase());
+   }
+   return newArray;
+ }
+
+ function changeCase(upperOrLower) {
+   var newArray = [];
+   var newString = "";
+   for (var i = 0; i < contentCollection.length; i++) {
+     (upperOrLower == 'upper') ? (newString = reverseUpperCase(contentCollection[i])) : (newString = contentCollection[i].toUpperCase());
+     newArray.push(newString);
+   }
+   return newArray;
+ }
+
+ function reverseUpperCase(content) {
+   return content.charAt(0).toUpperCase() + content.slice(1);
  }
 
  function clearInput() {
