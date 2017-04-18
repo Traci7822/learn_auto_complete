@@ -1,7 +1,3 @@
-// keyboard shortcuts for save and delete
-// after enter need to set input to space
-// doesnt filter until , or space
-
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 var remove_image_url = 'https://c1.staticflickr.com/4/3684/33135618604_414134ce5c_t.jpg';
 var contentCollection = getValues();
@@ -27,7 +23,6 @@ contentCollection.unshift(" ");
       }
       console.log('running');
     }, 10000)
-    // keep an eye on timer and adjust as needed
   }
 
   function buildExtensionField() {
@@ -110,11 +105,6 @@ contentCollection.unshift(" ");
  function resetMenu() {
    getMenuElement().innerHTML = " ";
  }
- //
- // function reloadMenu() {
- //   resetMenu();
- //   populateDropDownMenu();
- // }
 
  function getValues(callback) {
    contentCollection = [];
@@ -152,7 +142,6 @@ contentCollection.unshift(" ");
        chrome.storage.sync.remove(value, function() {});
      }
    }
-  // reloadMenu();
  }
 
  function setInput(){
@@ -228,11 +217,10 @@ contentCollection.unshift(" ");
  }
 
  function clearInput() {
-   event.preventDefault();
    var input = document.getElementsByTagName('textarea')[1].value == " ";
-   if (input.value != undefined) {
-     input.value = undefined
-   }
+  //  if (input.value != undefined) {
+  //    input.value = undefined
+  //  }
  }
 
  function detectEnterAndClear(e){
