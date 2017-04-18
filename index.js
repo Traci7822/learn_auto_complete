@@ -1,9 +1,11 @@
 // keyboard shortcuts for save and delete
-// set focus back to iput after save
+// after enter need to set input to space
+// doesnt filter until , or space
 
 var save_image_url = 'https://c1.staticflickr.com/3/2900/33745640515_a90c44b434_t.jpg';
 var remove_image_url = 'https://c1.staticflickr.com/4/3684/33135618604_414134ce5c_t.jpg';
 var contentCollection = getValues();
+contentCollection.unshift(" ");
 
   window.onload = function(){
     buildExtensionField();
@@ -88,7 +90,6 @@ var contentCollection = getValues();
  }
 
  function populateDropDownMenu(content = contentCollection) {
-   content.unshift(" ");
    var uniqueContents = [...new Set(content.sort())];
    for (var i = 0; i < uniqueContents.length; i++) {
      var item = uniqueContents[i];
@@ -97,10 +98,13 @@ var contentCollection = getValues();
      element.value = item;
      getMenuElement().appendChild(element);
    }
-   getMenuElement().addEventListener('change', function() {
-     setInput();
-     focusOnInput();
-   })
+
+  getMenuElement().selectedIndex = -1;
+  getMenuElement().addEventListener('change', function() {
+    setInput();
+    focusOnInput();
+  })
+
  }
 
  function resetMenu() {
