@@ -12,6 +12,8 @@ Can you paste the code you've written as well as the first full error message th
 
 Can you try fully exiting the IDE (`File > Exit` or `ctrl + q`)? Then click the `open` button to relaunch it.
 
+Great, I'll have a learn expert with you shortly
+
 How about a screen share to go over this?
 
 How about a screen share to help troubleshoot this?
