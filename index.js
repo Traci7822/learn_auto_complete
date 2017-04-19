@@ -218,9 +218,6 @@ contentCollection.unshift(" ");
 
  function clearInput() {
    var input = document.getElementsByTagName('textarea')[1].value == " ";
-  //  if (input.value != undefined) {
-  //    input.value = undefined
-  //  }
  }
 
  function detectEnterAndClear(e){
