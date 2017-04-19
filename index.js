@@ -6,6 +6,7 @@ contentCollection.unshift(" ");
   window.onload = function(){
     buildExtensionField();
     buildContentActions();
+    clearInput();
     populateDropDownMenu();
     attachInputListener();
     checkForResolved();
@@ -177,6 +178,7 @@ contentCollection.unshift(" ");
 
  function attachInputListener() {
    var input = document.getElementsByTagName('textarea')[1];
+
    input.addEventListener('change', function(event) {
      filterMenu();
    });
