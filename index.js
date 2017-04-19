@@ -3,6 +3,9 @@ var remove_image_url = 'https://c1.staticflickr.com/4/3684/33135618604_414134ce5
 var contentCollection = getValues();
 contentCollection.unshift(" ");
 
+
+// on active class change clear input
+
   window.onload = function(){
     buildExtensionField();
     buildContentActions();
@@ -178,13 +181,13 @@ contentCollection.unshift(" ");
 
  function attachInputListener() {
    var input = document.getElementsByTagName('textarea')[1];
-
    input.addEventListener('change', function(event) {
      filterMenu();
    });
   input.addEventListener('keydown', function(e) {
     detectEnterAndClear(event);
   })
+  }
  }
 
  function filterMenu() {
