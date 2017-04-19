@@ -85,7 +85,12 @@ contentCollection.unshift(" ");
  }
 
  function populateDropDownMenu(content = contentCollection) {
-   var uniqueContents = [...new Set(content.sort())];
+   if (content.length > 1) {
+     var uniqueContents = [...new Set(content.sort())];
+
+   } else {
+     var uniqueContents = content;
+   }
    for (var i = 0; i < uniqueContents.length; i++) {
      var item = uniqueContents[i];
      var element = document.createElement('option');
@@ -104,6 +109,11 @@ contentCollection.unshift(" ");
 
  function resetMenu() {
    getMenuElement().innerHTML = " ";
+ }
+
+ function reloadMenu(){
+   resetMenu();
+   populateDropDownMenu();
  }
 
  function getValues(callback) {
@@ -131,6 +141,8 @@ contentCollection.unshift(" ");
      console.log('content saved');
    });
    focusOnInput();
+   contentCollection.push(content);
+   reloadMenu();
  }
 
  function removeAction() {
