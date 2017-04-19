@@ -148,12 +148,13 @@ contentCollection.unshift(" ");
  function removeAction() {
    var menu = getMenuElement();
    var value = menu.options[menu.selectedIndex].value;
-   menu.remove(menu.selectedIndex);
    if (value != " ") {
      if (confirm('Are you sure you want to delete this item?')) {
        chrome.storage.sync.remove(value, function() {});
      }
    }
+   contentCollection.splice(contentCollection.indexOf(value), 1);
+   reloadMenu();
  }
 
  function setInput(){
