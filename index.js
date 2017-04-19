@@ -187,7 +187,6 @@ contentCollection.unshift(" ");
   input.addEventListener('keydown', function(e) {
     detectEnterAndClear(event);
   })
-  }
  }
 
  function filterMenu() {
